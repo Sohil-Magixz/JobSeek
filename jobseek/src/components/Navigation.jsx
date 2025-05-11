@@ -10,7 +10,6 @@ function Navigation() {
     } else {
       setX("hidden mr-2 justify-end items-end");
     }
-    console.log(x);
   }
 
   return (

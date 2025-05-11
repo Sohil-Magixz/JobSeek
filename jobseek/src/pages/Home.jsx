@@ -31,7 +31,6 @@ function Home() {
         }
 
         const matchesRole = selectedRoles.length === 0 || bool;
-        console.log(selectedRoles)
 
         return matchesSearch && matchesType && matchesLocation && matchesRole;
     });
@@ -43,8 +42,8 @@ function Home() {
     return (
         <>
         {selectedJob && (
-            <div className="fixed inset-0 z-1 flex justify-center items-center backdrop-blur-lg ">
-                <div className="box h-[300px] w-[600px] bg-white rounded-[20px] p-6">
+            <div className="fixed inset-0 z-1 flex justify-center items-center backdrop-blur-lg">
+                <div className="box h-[300px] w-[600px] bg-white rounded-[20px] p-6  mx-4 drop-shadow-2xl">
                     <button className="text-3xl" onClick={()=>setSelectedJob(null)}>&times;</button>
                     <h1 className="text-[30px] bold flex flex-col justify-evenly">{selectedJob.title}</h1>
                     <h6 className="text-xl mb-6">{selectedJob.company}</h6>
