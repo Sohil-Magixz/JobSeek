@@ -1,0 +1,223 @@
+[
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "company": "Google",
+      "location": "Chennai",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/google.com",
+      "isSaved": false,
+      "description": "We’re looking for a React developer with experience in building responsive UI using TailwindCSS.",
+      "applyLink": "https://careers.google.com"
+    },
+    {
+      "id": 2,
+      "title": "UI Engineer",
+      "company": "Zoho",
+      "location": "Remote",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/zoho.com",
+      "isSaved": true,
+      "description": "Work with product designers to build accessible and modern UI for Zoho’s suite of apps.",
+      "applyLink": "https://careers.zoho.com"
+    },
+    {
+      "id": 3,
+      "title": "React Developer Intern",
+      "company": "Freshworks",
+      "location": "Remote",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/freshworks.com",
+      "isSaved": false,
+      "description": "Build scalable React components to enhance the Freshdesk product experience.",
+      "applyLink": "https://careers.freshworks.com"
+    },
+    {
+      "id": 4,
+      "title": "Frontend Intern",
+      "company": "Swiggy",
+      "location": "Bangalore",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/swiggy.com",
+      "isSaved": true,
+      "description": "Build pixel-perfect UI with HTML5 and CSS3. Some knowledge of ReactJS preferred.",
+      "applyLink": "https://careers.swiggy.com"
+    },
+    {
+      "id": 5,
+      "title": "React Native Developer",
+      "company": "Ola",
+      "location": "Hyderabad",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/olacabs.com",
+      "isSaved": false,
+      "description": "Maintain and develop new features in the Ola driver and rider apps.",
+      "applyLink": "https://careers.olacabs.com"
+    },
+    {
+      "id": 6,
+      "title": "Web UI Engineer",
+      "company": "CRED",
+      "location": "Bangalore",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/cred.club",
+      "isSaved": false,
+      "description": "Join the frontend team to craft visually stunning UI with animations and transitions.",
+      "applyLink": "https://careers.cred.club"
+    },
+    {
+      "id": 7,
+      "title": "Frontend Developer Intern",
+      "company": "Flipkart",
+      "location": "Chennai",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/flipkart.com",
+      "isSaved": true,
+      "description": "Assist in building dynamic UI components using React and Redux.",
+      "applyLink": "https://careers.flipkart.com"
+    },
+    {
+      "id": 8,
+      "title": "UI/UX Developer",
+      "company": "PhonePe",
+      "location": "Remote",
+      "type": "Contract",
+      "logoUrl": "https://logo.clearbit.com/phonepe.com",
+      "isSaved": false,
+      "description": "Develop interactive and intuitive user interfaces for financial apps.",
+      "applyLink": "https://careers.phonepe.com"
+    },
+    {
+      "id": 9,
+      "title": "Frontend Software Engineer",
+      "company": "TCS",
+      "location": "Chennai",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/tcs.com",
+      "isSaved": false,
+      "description": "Work with global teams to deliver frontend solutions using Angular and React.",
+      "applyLink": "https://careers.tcs.com"
+    },
+    {
+      "id": 10,
+      "title": "Web Intern",
+      "company": "Wipro",
+      "location": "Remote",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/wipro.com",
+      "isSaved": true,
+      "description": "Contribute to UI bug fixes and small features in internal dashboards.",
+      "applyLink": "https://careers.wipro.com"
+    },
+    {
+      "id": 11,
+      "title": "Frontend Developer",
+      "company": "Infosys",
+      "location": "Hyderabad",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/infosys.com",
+      "isSaved": false,
+      "description": "Build high-performance, reusable code for web components using React.",
+      "applyLink": "https://careers.infosys.com"
+    },
+    {
+      "id": 12,
+      "title": "Frontend Engineer Intern",
+      "company": "Accenture",
+      "location": "Chennai",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/accenture.com",
+      "isSaved": false,
+      "description": "Build and debug UI prototypes. Work closely with UX designers.",
+      "applyLink": "https://careers.accenture.com"
+    },
+    {
+      "id": 13,
+      "title": "React JS Intern",
+      "company": "Capgemini",
+      "location": "Remote",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/capgemini.com",
+      "isSaved": true,
+      "description": "Support senior devs in building client dashboards with ReactJS and Material UI.",
+      "applyLink": "https://careers.capgemini.com"
+    },
+    {
+      "id": 14,
+      "title": "Web UI Developer",
+      "company": "Byjus",
+      "location": "Bangalore",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/byjus.com",
+      "isSaved": false,
+      "description": "Own and lead the UI development of student portals and learning dashboards.",
+      "applyLink": "https://careers.byjus.com"
+    },
+    {
+      "id": 15,
+      "title": "Next.js Developer",
+      "company": "WhiteHat Jr",
+      "location": "Remote",
+      "type": "Contract",
+      "logoUrl": "https://logo.clearbit.com/whitehatjr.com",
+      "isSaved": false,
+      "description": "Build SSR and SEO-friendly websites using Next.js and Tailwind.",
+      "applyLink": "https://careers.whitehatjr.com"
+    },
+    {
+      "id": 16,
+      "title": "Frontend Intern",
+      "company": "Vedantu",
+      "location": "Chennai",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/vedantu.com",
+      "isSaved": true,
+      "description": "Collaborate with backend engineers to create and test React components.",
+      "applyLink": "https://careers.vedantu.com"
+    },
+    {
+      "id": 17,
+      "title": "Frontend Web Developer",
+      "company": "Tech Mahindra",
+      "location": "Chennai",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/techmahindra.com",
+      "isSaved": false,
+      "description": "Support client projects using React and vanilla JavaScript for enterprise UIs.",
+      "applyLink": "https://careers.techmahindra.com"
+    },
+    {
+      "id": 18,
+      "title": "React Developer",
+      "company": "Mindtree",
+      "location": "Remote",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/mindtree.com",
+      "isSaved": true,
+      "description": "Build reusable React components for internal projects.",
+      "applyLink": "https://careers.mindtree.com"
+    },
+    {
+      "id": 19,
+      "title": "Frontend Developer Intern",
+      "company": "HCL",
+      "location": "Hyderabad",
+      "type": "Internship",
+      "logoUrl": "https://logo.clearbit.com/hcltech.com",
+      "isSaved": false,
+      "description": "Develop accessible web forms and widgets using React.",
+      "applyLink": "https://careers.hcltech.com"
+    },
+    {
+      "id": 20,
+      "title": "Web Developer",
+      "company": "Reliance Jio",
+      "location": "Mumbai",
+      "type": "Full-Time",
+      "logoUrl": "https://logo.clearbit.com/jio.com",
+      "isSaved": false,
+      "description": "Build internal tooling UIs for data teams using React and D3.js.",
+      "applyLink": "https://careers.jio.com"
+    }
+  ]
+  
