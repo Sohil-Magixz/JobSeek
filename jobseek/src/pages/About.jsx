@@ -3,7 +3,7 @@ import React from "react";
 function About(){
 
     return (
-    <div className="p-3 flex flex-col sm:mx-16 mt-16 mx-8 h-[65vh]">
+    <div className="p-3 flex flex-col sm:mx-16 mx-8 h-[100vh] mt-[70px] py-7">
         <h1 className="text-7xl pb-6">About Us</h1>
         <p className="">Job Seek. is a platform built to simplify the job search process for everyone — from fresh graduates to experienced professionals.
 Our mission is to connect job seekers with meaningful opportunities by providing a clean, efficient, and focused job-hunting experience.

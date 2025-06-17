@@ -1,16 +1,48 @@
 import React, { useState } from "react";
 import JobCard from "../components/JobCard.jsx";
 import FilterTab from "../components/FilterTab.jsx";
-import dummyJobs from "../data/dummyJobs.json";
-import JobDetails from "../components/JobDetails.jsx";
+// import dummyJobs from "../data/dummyJobs.json";
+import { useEffect } from "react";
+
 function Home() {
+    let matchesRole;
     var notFound = "hidden";
-    const data = dummyJobs;
+    const [data, setData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [location, setLocation] = useState("All");
     const [type, setType] = useState("All");
     const [selectedRoles, setSelectedRoles] = useState([])
     const [selectedJob, setSelectedJob] = useState();
+    const [like, setLike] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(function(){
+        fetch("http://192.168.1.2:9000/api/jobs")
+        .then((res)=>res.json())
+        .then((jobs)=>{
+             setData(jobs);
+            // console.log("Data fetched successfully from the Backend !!");
+            // console.log(data);
+        }).catch((err)=>console.error("Server Error, Failed to Fetch the jobs ", err)
+    )
+    }, []);
+
+    useEffect(function(){
+        const tuser = localStorage.getItem("user");
+        // console.log(typeof(tuser))
+        // console.log("tuser raw value:", tuser, "typeof:", typeof tuser);
+        if (tuser && tuser !== "undefined" && tuser !== "null" && tuser.trim() !== ""){
+            setIsLoggedIn(true);
+            const user = JSON.parse(tuser);
+            fetch(`http://192.168.1.2:9000/api/user/${user.username}`).then(res => res.json()).then(data => {
+                setLike(data.likedJobs || []);
+            }).catch((err)=>{
+                console.error(err);
+            }, []);
+        }else{
+            setIsLoggedIn(false);
+        }
+    }, []);
 
     const filteredData = data.filter((job) => {
         const query = searchQuery.toLowerCase();
@@ -24,16 +56,19 @@ function Home() {
         const matchesType = type === "All" || job.type === type;
         const matchesLocation = location === "All" || job.location === location;
         var bool = false;
-        for (let i = 0; i < selectedRoles.length; i++) {
-            if (job.title.includes(selectedRoles[i])) {
-                bool = true;
+    
+    let matchesRole = true;
+    if (selectedRoles.length > 0) {
+        matchesRole = selectedRoles.some(role => {
+            if (role === "Favorites") {
+                return like.includes(job.id);
             }
-        }
-
-        const matchesRole = selectedRoles.length === 0 || bool;
-
+            return job.title.includes(role);
+        });
+    }
         return matchesSearch && matchesType && matchesLocation && matchesRole;
     });
+    // console.log("selectedRoles:", selectedRoles);
 
     if (filteredData.length === 0) {
         notFound = "block";
@@ -48,7 +83,7 @@ function Home() {
                     <h1 className="text-[30px] bold flex flex-col justify-evenly">{selectedJob.title}</h1>
                     <h6 className="text-xl mb-6">{selectedJob.company}</h6>
                     <p className="mb-2">{selectedJob.description}</p>
-                    <button className="px-3 py-1 bg-blue-400 rounded-[8px]">Apply Now</button>
+                    <a href={selectedJob.applyLink} target="_blank" className="px-3 py-1 bg-blue-400 rounded-[8px]">Apply Now</a>
                 </div>
             </div>
         )}
@@ -72,8 +107,8 @@ function Home() {
                                         </div>
                                     </div>
                                 )} */}
-            <div className="Home h-auto w-screen 2xl-container">
-                <div className="satefy-container h-full w-[90%] mx-auto flex flex-col justify-evenly items-center">
+            <div className="Home h-auto w-screen 2xl-container mt-[70px]">
+                <div className="satefy-container w-[90%] mx-auto flex flex-col justify-evenly items-center ">
                     <h1 className="my-12 text-2xl sm:text-4xl text-center bg--100">Find your next Job.</h1>
 
                     <div className="mb-10 bg-gray700 w-full flex flex-col justify-evenly items-center">
@@ -120,10 +155,12 @@ function Home() {
                         <FilterTab
                             selectedRoles={selectedRoles}
                             setSelectedRoles={setSelectedRoles}
+                            like={like}
+                            setLike={setLike}
                         />                    </div>
                     <div className="flex justify-between">
-                        <div className="flex flex-col">
-                            <div className="bg-gray-100 h-[100vh] overflow-auto w-[98vw] sm:w-[50vw] sm:mr-6 rounded-2xl flex flex-col justify-start items-center my-1 mt-3 p-2 drop-shadow-xl">
+                        <div className="flex flex-col ">
+                            <div className="bg-gray-100 overflow-auto h-[70vh] w-[80vw] md:w-[50vw] sm:mr-6 rounded-2xl flex flex-col my-1 mt-3 p-2 drop-shadow-xl">
                                 {filteredData.map((item) => (
                                     <JobCard
                                         key={item.id}
@@ -134,6 +171,9 @@ function Home() {
                                         type={item.type}
                                         location={item.location}
                                         onChangeJob={()=>setSelectedJob(item)}
+                                        like={like}
+                                        setLike={setLike}
+                                        jobId={item.id}
                                     />
                                 ))}
                                 
@@ -146,6 +186,8 @@ function Home() {
                             <FilterTab
                                 selectedRoles={selectedRoles}
                                 setSelectedRoles={setSelectedRoles}
+                                like={like}
+                                setLike={setLike}
                             />
                         </div>
                     </div>
