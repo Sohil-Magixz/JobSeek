@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function VerifyOTP() {
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [otp, setOtp] = useState("");
     const [email, setEmail] = useState(() => localStorage.getItem("pendingEmail") || "");
     const [error, setError] = useState("");
@@ -10,7 +11,7 @@ function VerifyOTP() {
     const handleVerify = async () => {
         try {
             console.log(email+" "+otp);
-            const res = await axios.post("http://192.168.1.2:9000/api/auth/verify", { email, otp });
+            const res = await axios.post(`${BASE_URL}/api/auth/verify`, { email, otp });
             alert("Your account has been Verified Successfully!");
             localStorage.setItem("user", JSON.stringify(res.data.user));
             localStorage.removeItem("pendingemail");
@@ -21,7 +22,7 @@ function VerifyOTP() {
     };
     const handleResend = async () => {
         try {
-            await axios.post("http://192.168.1.2:5000/api/auth/resendOtp", { email });
+            await axios.post(`${BASE_URL}/api/auth/resendOtp`, { email });
             alert("OTP resent to your email.");
         } catch (err) {
             console.error("Resend error", err);
