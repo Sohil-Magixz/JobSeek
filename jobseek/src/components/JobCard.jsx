@@ -5,6 +5,7 @@ import heart from "../assets/heart.png";
 import axios from "axios";
 import { useEffect } from "react";
 function JobCard({ jobRole, company, jDescription, jType, logo, type, location, onChangeJob, like, setLike, jobId }) {
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const [liked, setLiked] = useState(false);
   useEffect(()=>{
@@ -19,7 +20,7 @@ function JobCard({ jobRole, company, jDescription, jType, logo, type, location, 
       return ;
     }
     const user = JSON.parse(tuser);
-    axios.post("http://192.168.1.2:9000/api/user", {
+    axios.post(`${BASE_URL}/api/user`, {
       userId:user.username,
       jobId,
     }).then((res)=>{

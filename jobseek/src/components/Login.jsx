@@ -7,6 +7,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -16,7 +17,7 @@ function Login() {
         if (emailRegex.test(email) && password.length >= 8) {
             setIsLoading(true);
             try {
-                const res = await axios.post("http://192.168.1.2:9000/api/auth/login", { email, password });
+                const res = await axios.post(`${BASE_URL}/api/auth/login`, { email, password });
                 console.log("Logged in: ", res.data);
                 alert("Login Successful");
                 localStorage.setItem("user", JSON.stringify(res.data.user));

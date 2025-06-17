@@ -15,26 +15,23 @@ function Home() {
     const [selectedJob, setSelectedJob] = useState();
     const [like, setLike] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(function(){
-        fetch("http://192.168.1.2:9000/api/jobs")
+        fetch(`${BASE_URL}/api/jobs`)
         .then((res)=>res.json())
         .then((jobs)=>{
              setData(jobs);
-            // console.log("Data fetched successfully from the Backend !!");
-            // console.log(data);
         }).catch((err)=>console.error("Server Error, Failed to Fetch the jobs ", err)
     )
     }, []);
 
     useEffect(function(){
         const tuser = localStorage.getItem("user");
-        // console.log(typeof(tuser))
-        // console.log("tuser raw value:", tuser, "typeof:", typeof tuser);
         if (tuser && tuser !== "undefined" && tuser !== "null" && tuser.trim() !== ""){
             setIsLoggedIn(true);
             const user = JSON.parse(tuser);
-            fetch(`http://192.168.1.2:9000/api/user/${user.username}`).then(res => res.json()).then(data => {
+            fetch(`${BASE_URL}/api/user/${user.username}`).then(res => res.json()).then(data => {
                 setLike(data.likedJobs || []);
             }).catch((err)=>{
                 console.error(err);

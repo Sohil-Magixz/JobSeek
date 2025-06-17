@@ -8,8 +8,10 @@ function Register() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
     async function handleSubmit(e) {
+        
         if(isLoading) return;
         
         e.preventDefault();
@@ -17,7 +19,7 @@ function Register() {
         if (emailRegex.test(email) && password.length >= 8 && !username.includes(" ") && username.length>2 && username.length<16) {
             setIsLoading(true);
             try {
-                const res = await axios.post("http://192.168.1.2:9000/api/auth/register", { username, email, password });
+                const res = await axios.post(`${BASE_URL}/api/auth/register`, { username, email, password });
                 localStorage.setItem("pendingEmail", email);
                 navigate("/verify");
             } catch (err) {
