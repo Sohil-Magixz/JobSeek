@@ -14,7 +14,6 @@ function JobCard({ jobRole, company, jDescription, jType, logo, type, location, 
 
   function changeLike() {
     const tuser = localStorage.getItem("user");
-    // console.log(user);
     if(tuser==="undefined" || tuser===null){
       alert("Login to like jobs");
       return ;
@@ -25,8 +24,6 @@ function JobCard({ jobRole, company, jDescription, jType, logo, type, location, 
       jobId,
     }).then((res)=>{
       setLike(res.data.likedJobs);
-      // console.log(res.data);
-      // console.log(res.data.likedJobs);
     }).catch((e)=>{
       console.error(e);
     });

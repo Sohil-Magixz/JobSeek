@@ -16,13 +16,13 @@ export const register = async (req, res) => {
             const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
             const user = await User.create({username, email, password: hashedPassword, otp, otpExpiry});
             await sendMail(email, "Verify your account",`Your OTP is ${otp}, Do not share it with anyone.`);
-            res.status(201).json({message:"User registered, Check Email for OTP Verification of Account"});
+            return res.status(201).json({message:"User registered, Check Email for OTP Verification of Account"});
         }
         else{
-            res.status(409).json({message: "User already exists"});
+            return res.status(409).json({message: "User already exists"});
         }
     } catch(err){
-        res.status(400).json({error: err.message});
+        return res.status(400).json({error: err.message});
     }
 };
 
@@ -52,22 +52,29 @@ export const login = async (req, res) => {
             }
         });
     } catch (err) {
-        console.error("Error:", err);
-        res.status(500).json({ message: "Internal Server Error" });
+        // console.error("Error:", err);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
 export const verifyOtp = async (req, res) => {
-    const {email,otp} = req.body;
+    const {email,otp, purpose} = req.body;
     const user = await User.findOne({email});
     if(!user) return res.status(404).json({message:"User not found"});
-    if(user.otp!==otp || user.otpExpiry<Date.now()) return res.status(400).json({error:"OTP is Invalid or Expired"});
+    // console.log(otp+" "+email+" "+purpose+" \n");
 
-    user.isVerified = true;
-    user.otp = null;
-    user.otpExpiry = null;
-    await user.save();
-    res.status(200).json({message:"User has been verified"});
+    // console.log(user+" "+user.email+" "+user.otp+" ");
+    if(user.otp!==otp || user.otpExpiry<Date.now()) return res.status(400).json({error:"OTP is Invalid or Expired"});
+    if(purpose==="register"){
+        user.isVerified = true;
+        user.otp = null;
+        user.otpExpiry = null;
+        await user.save();
+        return res.status(200).json({message:"User has been verified"});
+
+    }else{
+        return res.status(200).json({message:"OTP Verified, can redirect to /reset-password"});
+    }
 };
 export const resendOtp = async (req,res) =>{
         const {email} = req.body;
@@ -77,5 +84,19 @@ export const resendOtp = async (req,res) =>{
         user.otp = otp;
         user.otpExpiry = new Date(Date.now()+10*60*1000);
         await sendMail(email, "OTP Resent for Verification",`Your OTP is ${otp}`);
-        res.status(200).json({message:"OTP Resent."});
+        await user.save();
+        return res.status(200).json({message:"OTP Resent."});
+}
+export const resetPassword = async(req, res) =>{
+    const {email, otp,newpassword} = req.body;
+    const user = await User.findOne({email:email});
+    if(!user) return res.status(404).json({message:"User not found"});
+    if (user.otp !== otp || user.otpExpiry < Date.now()) {
+        return res.status(400).json({ message: "OTP is invalid or expired" });
+    }
+    user.password = await bcrypt.hash(newpassword,10);
+    await user.save();
+    user.otp = null;
+    user.otpExpiry = null;
+    return res.status(200).json("Password has been changed successfully");
 }

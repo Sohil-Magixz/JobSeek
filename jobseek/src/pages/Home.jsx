@@ -16,6 +16,7 @@ function Home() {
     const [like, setLike] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(function(){
         fetch(`${BASE_URL}/api/jobs`)
@@ -73,6 +74,7 @@ function Home() {
 
     return (
         <>
+
         {selectedJob && (
             <div className="fixed inset-0 z-1 flex justify-center items-center backdrop-blur-lg">
                 <div className="box h-[300px] w-[600px] bg-white rounded-[20px] p-6  mx-4 drop-shadow-2xl">
@@ -104,7 +106,12 @@ function Home() {
                                         </div>
                                     </div>
                                 )} */}
-            <div className="Home h-auto w-screen 2xl-container mt-[70px]">
+            <div className="Home h-auto 2xl-container mt-[70px]">
+                {isLoading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.2)] bg-opacity-40 backdrop-blur-sm">
+                    <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            )}
                 <div className="satefy-container w-[90%] mx-auto flex flex-col justify-evenly items-center ">
                     <h1 className="my-12 text-2xl sm:text-4xl text-center bg--100">Find your next Job.</h1>
 
@@ -156,8 +163,13 @@ function Home() {
                             setLike={setLike}
                         />                    </div>
                     <div className="flex justify-between">
-                        <div className="flex flex-col ">
-                            <div className="bg-gray-100 overflow-auto h-[70vh] w-[80vw] md:w-[50vw] sm:mr-6 rounded-2xl flex flex-col my-1 mt-3 p-2 drop-shadow-xl">
+                        {isLoading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.2)] bg-opacity-40 backdrop-blur-sm">
+                    <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            )}
+                        <div className="flex flex-col justify-center items-center">
+                            <div className="bg-gray-100 overflow-auto h-[70vh] w-[80vw] md:w-[50vw] sm:mr-6 rounded-2xl flex flex-col justify-start items-center my-1 mt-3 p-2 drop-shadow-xl">
                                 {filteredData.map((item) => (
                                     <JobCard
                                         key={item.id}

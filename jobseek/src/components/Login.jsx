@@ -10,6 +10,27 @@ function Login() {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
 
+    async function handleForgot (e){
+        e.preventDefault();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!emailRegex.test(email)){
+            return alert("Enter a valid email");
+        }
+        setIsLoading(true);
+        try{
+            const res = await axios.post(`${BASE_URL}/api/auth/resendOtp`, {email});
+            localStorage.setItem("purpose","reset-password");
+            localStorage.setItem("pendingemail",email);
+            const purpose = localStorage.getItem("purpose");
+            console.log(purpose+" "+email);
+            navigate("/verify");
+        }catch(e){
+            console.error(e);
+        }finally{
+            setIsLoading(false);
+        }
+    }
+
     async function handleSubmit(e) {
         if (isLoading) return;
         e.preventDefault();
@@ -29,7 +50,7 @@ function Login() {
                 console.error(err);
 
                 if (err.response && err.response.data && err.response.data.message) {
-                    alert(err.response.data.message); // ✅ this shows "User not found" or "Incorrect password"
+                    alert(err.response.data.message);
                 } else {
                     alert("Login failed. Please try again.");
                 }
@@ -52,7 +73,7 @@ function Login() {
                 </div>
             )}
 
-            <form action="" onSubmit={handleSubmit} className=" p-3 flex flex-col  justify-start text-white bg-cyan-700 h-auto pb-22 w-[90%] sm:w-[20%] rounded-[20px]">
+            <form action="" onSubmit={handleSubmit} className="sm:min-w-[400px] p-3 flex flex-col  justify-start text-white bg-cyan-700 h-auto pb-22 w-[90%] sm:w-[20%] rounded-[20px]">
                 <div className="w-full text-center bg-amber100  mb-14 mt-14">
                     <h1 className="py-3 text-2xl">Login</h1>
                 </div>
@@ -60,7 +81,10 @@ function Login() {
                     Email :<input value={email} onChange={(e) => { setEmail(e.target.value) }} type="email" name="" required className="px-3 py-1 mb-3 bg-white text-black rounded-[10px] mx-1" />
                     Password: <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" name="" required className="px-3 py-1 mb-3 bg-white text-black rounded-[10px] mx-1" />
                     <button type="submit" className="bg-white text-cyan-700 rounded-[20px] mt-6 py-4 cursor-pointer">Submit</button>
-                    <a href="/verify">Forgot your password?</a>
+                    <div className="flex justify-between pt-3">
+                        <button onClick={handleForgot} className="text-blue-300 hover:underline cursor-pointer">Forgot your password?</button>
+                        <a href="/register" className="text-blue-300 hover:underline">Create a new account?</a>
+                    </div>
                 </div>
             </form>
         </div>

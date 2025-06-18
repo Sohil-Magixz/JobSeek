@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import hmenu from "../assets/hmenu.png";
 function Navigation() {
-  const [x, setX] = useState("hidden mr-2 justify-center items-center");
-  const [y, setY] = useState("hidden absolute right-0 top-[110%] bg-white shadow-lg rounded-md w-[150px] z-10 mt-[2px]")
+  const [x, setX] = useState("hidden mr2 justify-center items-center");
+  const [y, setY] = useState("hidden absolute right-0 top-[110%] bg-white shadow-lg rounded-md w[150px] z-10 mt-[2px]")
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Navigation() {
 
   function showBar() {
     if (x.includes("hidden")) {
-      setX("sm:flex mr-2 flex-col justify-end items-end mx-12");
+      setX("sm:flex mr-2 flex-col justify-end items-end mx-8");
     } else {
       setX("hidden mr-2 justify-end items-end");
     }
@@ -25,9 +25,10 @@ function Navigation() {
     if(y.includes("hidden")){
       setY("absolute right-0 top-[110%] bg-white shadow-lg rounded-md w-auto z-10 mt-[2px]");
     }else{
-      setY("absolute right-0 top-[110%] bg-white shadow-lg rounded-md w-[150px] z-10 mt-[2px] hidden")
+      setY("absolute right-0 top-[110%] bg-white shadow-lg rounded-md w-[120px] z-10 mt-[2px] hidden")
     }
   }
+
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -37,7 +38,7 @@ function Navigation() {
 
   return (
     <>
-      <div className="top-0 fixed sm:relative nav-bar h-[70px] w-screen bg-cyan-700 flex justify-around sm:justify-around items-center mx-auto rounded-b-2xl z-50">
+      <div className="top-0 fixed sm:relative nav-bar h-[70px] w-full bg-cyan-700 flex justify-around sm:justify-around items-center mx-auto rounded-b-2xl z-50">
         <h1 className="sm:ml-2 center text-4xl text-white">Job Seek.</h1>
 
         <ul className="sm:flex hidden mr-2 justify-center items-center">
@@ -80,18 +81,18 @@ function Navigation() {
 
       <div className="sm:hidden fixed z-50 flex flex-col justify-end items-end bg-amber950 w-screen">
         <ul className={x}>
-          <Link to="/"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">Home</li></Link>
-          <Link to="/about"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">About</li></Link>
-          <Link to="/contact"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">Contact</li></Link>
+          <Link onClick={showBar} to="/"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">Home</li></Link>
+          <Link onClick={showBar} to="/about"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">About</li></Link>
+          <Link onClick={showBar} to="/contact"><li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">Contact</li></Link>
           {!user ? (
             <>
               <Link to="/register">
-                <li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">
+                <li onClick={showBar} className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded[16px] hover:scale-105">
                   Register
                 </li>
               </Link>
               <Link to="/login">
-                <li className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded-b-[16px] hover:scale-105">
+                <li onClick={showBar} className="bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex items-center rounded-b-[16px] hover:scale-105">
                   Login
                 </li>
               </Link>
@@ -100,7 +101,6 @@ function Navigation() {
             <li onClick={showUserDetail} className="relative group bg-cyan-700 mx-2 h-[50px] px-6 text-gray-100 flex flex-col justify-center items-center rounded-b-[16px] hover:scale-105 cursor-pointer">
               {user.username || "User"}
               <div className={y}>
-                {/* <div className="h-[10px] bg-opacity-0">.</div> */}
                 <p className="mx-auto text-center bg-amber100 py-2 border-b text-sm text-gray-700">
                   {user.email}
                 </p>

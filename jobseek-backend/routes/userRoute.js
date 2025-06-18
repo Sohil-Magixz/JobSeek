@@ -9,7 +9,7 @@ router.get('/:username', async(req, res)=>{
         if(!user) return res.status(404).json({error: "User not found"});
         res.json({likedJobs: user.likedJobs});
     }catch (error){
-        console.error(error);
+        return res.status(400).json({message:"Error Liking the jobs"});
     }
 });
 router.post('/', async(req, res)=>{

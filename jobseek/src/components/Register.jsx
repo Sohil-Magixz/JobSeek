@@ -21,6 +21,7 @@ function Register() {
             try {
                 const res = await axios.post(`${BASE_URL}/api/auth/register`, { username, email, password });
                 localStorage.setItem("pendingEmail", email);
+                localStorage.setItem("purpose","register");
                 navigate("/verify");
             } catch (err) {
                 if (err.response && err.response.data && err.response.data.message) {
@@ -49,7 +50,7 @@ function Register() {
                     <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
             )}
-            <form action="" onSubmit={handleSubmit} className=" p-3 flex flex-col  justify-start text-white bg-cyan-700 h-auto pb-22 w-[90%] sm:w-[20%] rounded-[20px]">
+            <form action="" onSubmit={handleSubmit} className="sm:min-w-[400px] p-3 flex flex-col  justify-start text-white bg-cyan-700 h-auto pb-22 w-[90%] sm:w-[20%] rounded-[20px]">
                 <div className="w-full text-center bg-amber100  mb-14 mt-14">
                     <h1 className="py-3 text-2xl">Register</h1>
                 </div>
@@ -59,6 +60,7 @@ function Register() {
                     Password: <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" name="" required className="px-3 py-1 mb-3 bg-white text-black rounded-[10px] mx-1" />
                     <button type="submit" className="bg-white text-cyan-700 rounded-[20px] mt-6 py-4 cursor-pointer">Submit</button>
                 </div>
+                <a href="/register" className="text-blue-300 hover:underline mt-3 inline-block w-[200px]">Already have an account?</a>
             </form>
         </div>
     );

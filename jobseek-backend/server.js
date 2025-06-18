@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{
 }).catch(err=>console.error("MongoDB Error", err));
 
 app.get('/', (req, res) => {
-    console.log("Root route accessed");
+    // console.log("Root route accessed");
     res.send("Job Seek Backend is Running!");
 });
 

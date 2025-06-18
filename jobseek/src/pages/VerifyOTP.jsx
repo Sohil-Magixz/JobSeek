@@ -5,19 +5,31 @@ function VerifyOTP() {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [otp, setOtp] = useState("");
     const [email, setEmail] = useState(() => localStorage.getItem("pendingEmail") || "");
+    const [purpose, setPurpose] = useState(()=>localStorage.getItem("purpose"));
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleVerify = async () => {
+        if(isLoading) return;
+        setIsLoading(true);
         try {
-            console.log(email+" "+otp);
-            const res = await axios.post(`${BASE_URL}/api/auth/verify`, { email, otp });
+            console.log(purpose);
+            const res = await axios.post(`${BASE_URL}/api/auth/verify`, { email, otp, purpose });
             alert("Your account has been Verified Successfully!");
-            localStorage.setItem("user", JSON.stringify(res.data.user));
             localStorage.removeItem("pendingemail");
-            navigate("/login");
+            if(purpose==="reset-password"){
+                localStorage.setItem("otp",otp);
+                localStorage.setItem("pendingemail", email);
+                console.log(email+" "+otp+" "+purpose);
+                navigate("/newpassword")
+            }else{
+                navigate("/login");
+            }
         } catch (err) {
             console.error(err);
+        }finally{
+            setIsLoading(false);
         }
     };
     const handleResend = async () => {
@@ -30,6 +42,11 @@ function VerifyOTP() {
     };
     return (
         <div className="flex flex-col justify-start pt-[200px] items-center mt-[70px] h-[100vh]">
+            {isLoading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.2)] bg-opacity-40 backdrop-blur-sm">
+                    <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            )}
             <h2 className="text-2xl font-bold mb-4 text-cyan-700">Verify your email</h2>
             <p className="mb-2 text-gray-600">We've sent an OTP to <span className="font-semibold">{email}</span></p>
             <input

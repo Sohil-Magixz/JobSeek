@@ -8,6 +8,7 @@ import Register from "./components/Register.jsx";
 import Footer from "./components/Footer.jsx"
 import { Routes, Route } from "react-router-dom";
 import VerifyOTP from "./pages/VerifyOTP.jsx";
+import NewPassword from "./pages/NewPassword.jsx";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/verify" element={<VerifyOTP />} />
+        <Route path="/newpassword" element={<NewPassword/>}/>
       </Routes>
       <Footer />
 
