@@ -83,7 +83,7 @@ function Login() {
                     <button type="submit" className="bg-white text-cyan-700 rounded-[20px] mt-6 py-4 cursor-pointer">Submit</button>
                     <div className="flex justify-between pt-3">
                         <button onClick={handleForgot} className="text-blue-300 hover:underline cursor-pointer">Forgot your password?</button>
-                        <a href="/register" className="text-blue-300 hover:underline">Create a new account?</a>
+                        <button onClick={()=>navigate("/register")} className="text-blue-300 hover:underline">Create a new account?</button>
                     </div>
                 </div>
             </form>
