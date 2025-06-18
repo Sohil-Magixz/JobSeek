@@ -14,19 +14,20 @@ function VerifyOTP() {
         if(isLoading) return;
         setIsLoading(true);
         try {
-            console.log(purpose);
+            // console.log(purpose);
             const res = await axios.post(`${BASE_URL}/api/auth/verify`, { email, otp, purpose });
             alert("Your account has been Verified Successfully!");
-            localStorage.removeItem("pendingemail");
             if(purpose==="reset-password"){
                 localStorage.setItem("otp",otp);
                 localStorage.setItem("pendingemail", email);
-                console.log(email+" "+otp+" "+purpose);
+                // console.log(email+" "+otp+" "+purpose);
                 navigate("/newpassword")
             }else{
+                localStorage.removeItem("pendingemail");
                 navigate("/login");
             }
         } catch (err) {
+            alert("error");
             console.error(err);
         }finally{
             setIsLoading(false);
