@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function VerifyOTP() {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [otp, setOtp] = useState("");
-    const [email, setEmail] = useState(() => localStorage.getItem("pendingEmail") || "");
+    const [email, setEmail] = useState(() => localStorage.getItem("pendingemail") || "");
     const [purpose, setPurpose] = useState(() => localStorage.getItem("purpose"));
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +20,8 @@ function VerifyOTP() {
             if (purpose === "reset-password") {
                 localStorage.setItem("otp", otp);
                 localStorage.setItem("pendingemail", email);
-                // console.log(email+" "+otp+" "+purpose);
-                navigate("/newpassword")
+
+                navigate("/newpassword");
             } else {
                 localStorage.removeItem("pendingemail");
                 navigate("/login");
@@ -37,6 +37,8 @@ function VerifyOTP() {
             console.error("Error details:", err);
         } finally {
             setIsLoading(false);
+            localStorage.removeItem("otp");
+            localStorage.removeItem("pendingemail");
         }
     };
     const handleResend = async () => {

@@ -20,7 +20,7 @@ function Register() {
             setIsLoading(true);
             try {
                 const res = await axios.post(`${BASE_URL}/api/auth/register`, { username, email, password });
-                localStorage.setItem("pendingEmail", email);
+                localStorage.setItem("pendingemail", email);
                 localStorage.setItem("purpose","register");
                 navigate("/verify");
             } catch (err) {
