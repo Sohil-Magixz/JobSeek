@@ -27,7 +27,7 @@ function VerifyOTP() {
                 navigate("/login");
             }
         } catch (err) {
-            alert("error");
+            alert(err);
             console.error(err);
         }finally{
             setIsLoading(false);
