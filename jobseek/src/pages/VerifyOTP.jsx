@@ -5,31 +5,37 @@ function VerifyOTP() {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [otp, setOtp] = useState("");
     const [email, setEmail] = useState(() => localStorage.getItem("pendingEmail") || "");
-    const [purpose, setPurpose] = useState(()=>localStorage.getItem("purpose"));
+    const [purpose, setPurpose] = useState(() => localStorage.getItem("purpose"));
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleVerify = async () => {
-        if(isLoading) return;
+        if (isLoading) return;
         setIsLoading(true);
         try {
             // console.log(purpose);
             const res = await axios.post(`${BASE_URL}/api/auth/verify`, { email, otp, purpose });
             alert("Your account has been Verified Successfully!");
-            if(purpose==="reset-password"){
-                localStorage.setItem("otp",otp);
+            if (purpose === "reset-password") {
+                localStorage.setItem("otp", otp);
                 localStorage.setItem("pendingemail", email);
                 // console.log(email+" "+otp+" "+purpose);
                 navigate("/newpassword")
-            }else{
+            } else {
                 localStorage.removeItem("pendingemail");
                 navigate("/login");
             }
         } catch (err) {
-            alert(err);
-            console.error(err);
-        }finally{
+            const errorMsg =
+                err.response?.data?.message ||  // custom error message from backend
+                err.response?.data?.error ||    // fallback for `error` field
+                err.message ||                  // generic Axios error
+                "Something went wrong!";        // fallback
+
+            alert(errorMsg);
+            console.error("Error details:", err);
+        } finally {
             setIsLoading(false);
         }
     };
