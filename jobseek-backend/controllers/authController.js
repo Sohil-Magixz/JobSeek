@@ -60,7 +60,7 @@ export const login = async (req, res) => {
 export const verifyOtp = async (req, res) => {
     const {email,otp, purpose} = req.body;
     const user = await User.findOne({email});
-    if(!user) return res.status(404).json({message:"User not found"});
+    // if(!user) return res.status(404).json({message:"User not found"});
     // console.log(otp+" "+email+" "+purpose+" \n");
 
     // console.log(user+" "+user.email+" "+user.otp+" ");
