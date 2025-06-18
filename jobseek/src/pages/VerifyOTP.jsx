@@ -37,8 +37,6 @@ function VerifyOTP() {
             console.error("Error details:", err);
         } finally {
             setIsLoading(false);
-            localStorage.removeItem("otp");
-            localStorage.removeItem("pendingemail");
         }
     };
     const handleResend = async () => {

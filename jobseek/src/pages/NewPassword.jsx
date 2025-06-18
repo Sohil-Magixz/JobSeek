@@ -26,6 +26,8 @@ function NewPassword(){
             }catch(err){
                 console.log(err);
             }finally{
+                localStorage.removeItem("pendingemail");
+                localStorage.removeItem("otp");
                 setIsLoading(false);
             }
         }else{
