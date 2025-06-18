@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function NewPassword(){
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [isLoading,setIsLoading] = useState(false);
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

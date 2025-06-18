@@ -60,7 +60,7 @@ function Register() {
                     Password: <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" name="" required className="px-3 py-1 mb-3 bg-white text-black rounded-[10px] mx-1" />
                     <button type="submit" className="bg-white text-cyan-700 rounded-[20px] mt-6 py-4 cursor-pointer">Submit</button>
                 </div>
-                <a href="/register" className="text-blue-300 hover:underline mt-3 inline-block w-[200px]">Already have an account?</a>
+                <a href="jobseek-in.vercel.app/register" className="text-blue-300 hover:underline mt-3 inline-block w-[200px]">Already have an account?</a>
             </form>
         </div>
     );
